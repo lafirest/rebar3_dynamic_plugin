@@ -1,0 +1,8 @@
+{application, rebar3_dynamic_plugin, [
+    {description, "A rebar plugin"},
+    {vsn, git},
+    {applications, [kernel, stdlib]},
+    {env, []},
+    {licenses, ["Apache 2.0"]},
+    {links, [{"github", "git@github.com:lafirest/rebar3_dynamic_plugin.git"}]}
+]}.

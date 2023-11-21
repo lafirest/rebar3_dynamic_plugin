@@ -24,9 +24,6 @@ jobs:
         version-type: strict
         otp-version: ${{matrix.otp}}
         rebar3-version: ${{matrix.rebar}}
-    - name: Bootstrap
-      if: always()
-      run: ./bootstrap
     - name: Format check
       env:
         ERL_FLAGS: "-enable-feature all"
@@ -49,10 +46,7 @@ jobs:
       with:
         otp-version: ${{matrix.otp}}
         rebar3-version: ${{matrix.rebar}}
-    - name: Bootstrap
-      if: always()
       shell: cmd
-      run: sh bootstrap
     - name: Tests
       env:
         ERL_FLAGS: "-enable-feature all"
