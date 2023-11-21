@@ -78,12 +78,21 @@ parse_opts(State) ->
     {Args, _} = rebar_state:command_parsed_args(State),
     case Args of
         [] ->
-            case rebar_state:get(State, dynamic_plugin_script, undefined) of
-                undefined ->
-                    #{};
-                Script ->
-                    #{task => Script}
-            end;
+            find_script(State);
         _ ->
             maps:from_list(Args)
     end.
+
+find_script(State) ->
+    case rebar_state:get(State, dynamic_plugin_script, undefined) of
+        undefined ->
+            #{};
+        Script ->
+            find_script_path(State, Script)
+    end.
+
+find_script_path(State, Script) ->
+    App = rebar_state:current_app(State),
+    Dir = rebar_app_info:dir(App),
+    Path = filename:join(Dir, Script),
+    #{script => Path}.
